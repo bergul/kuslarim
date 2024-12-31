@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React, { useLayoutEffect } from 'react'
 import { Ionicons } from '@expo/vector-icons';
 
@@ -10,24 +10,31 @@ export default function ManageCourse({ route, navigation }) {
     }
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: isEdit ? 'Dersi Düzenle' : 'Ders Ekle'
-        }, [isEdit, navigation]);
-    });
-    function deleteCourse() {
-        navigation.goBack();
-    }
-    return (
-        <View>
-            {isEdit && (<View>
+            title: isEdit ? 'Dersi Düzenle' : 'Ders Ekle',
+            headerRight: () => (
                 <Ionicons
                     name="trash"
                     size={24}
                     color="black"
-                    style={{ marginRight: 10 }} onPress={deleteCourse} /><Text>Ders Sil</Text>
-            </View>)};
+                    onPress={deleteCourse}
+                />
+            ),
+        }, [isEdit, navigation]);
+    });
 
-        </View >
-    )
+    function deleteCourse() {
+        navigation.goBack();
+    }
+
+    return (
+        <View>
+            {isEdit && (
+                <View>
+                    <Ionicons name="trash" size={24} color="black" onPress={deleteCourse} />
+                </View>
+            )}
+        </View>
+    );
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});
