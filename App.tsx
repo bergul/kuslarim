@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -16,7 +16,7 @@ const tab = createBottomTabNavigator();
 function MyTabs() {
 
   return (
-    <tab.Navigator screenOptions={{ headerStyle: { backgroundColor: 'pink' }, headerTintColor: 'white', tabBarStyle: { backgroundColor: 'pink' }, tabBarActiveTintColor: 'darkblue' }}>
+    <tab.Navigator screenOptions={({ navigation }) => ({ headerStyle: { backgroundColor: 'pink' }, headerTintColor: 'white', tabBarStyle: { backgroundColor: 'pink' }, tabBarActiveTintColor: 'darkblue', headerRight: () => (<Pressable onPress={(() => navigation.navigate('ManageCourse'))}><View><AntDesign name='setting' size={24} color='white' style={{ marginRight: 10 }} /></View></Pressable>) })}>
       <tab.Screen name="AllCourse" component={AllCourse} options={{ title: 'Tüm Kurslar', tabBarIcon: ({ color, size }) => (<Entypo name='list' color={color} size={size} />) }} />
       <tab.Screen name="RecentCourse" component={RecentCourse} options={{ title: 'Yakın Zamanda', tabBarIcon: ({ color, size }) => (<AntDesign name='hourglass' color={color} size={size} />) }} />
     </tab.Navigator>

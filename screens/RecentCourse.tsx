@@ -1,11 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import Courses from '../components/Courses'
 
 export default function RecentCourse() {
     return (
-        <View>
-            <Text>RecentCourse</Text>
-        </View>
+        <Courses coursePeriod='Son 1 Hafta' />
     )
 }
 

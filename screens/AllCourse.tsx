@@ -1,11 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import Courses from '../components/Courses'
 
 export default function AllCourse() {
     return (
-        <View>
-            <Text>AllCourse</Text>
-        </View>
+        <Courses coursePeriod='Hepsi' />
     )
 }
 
