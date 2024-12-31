@@ -2,10 +2,10 @@ import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import Input from './input'
 import { Ionicons } from '@expo/vector-icons'
-import { datgetformatDate } from '../helper/date'
+
 
 export default function CourseForm({ cancelHandler, onSubmit, buttonLabel, defaultValues }) {
-    const [inputData, setInputData] = useState({ amount: defaultValues ? defaultValues.amount.toString() : '', date: defaultValues ? datgetformatDate(defaultValues.date) : '', description: defaultValues ? defaultValues.description : '' })
+    const [inputData, setInputData] = useState({ amount: defaultValues ? defaultValues.amount.toString() : '', date: defaultValues ? defaultValues.date : '', description: defaultValues ? defaultValues.description : '' })
     console.log(inputData)
     function inputChange(key, value) {
         setInputData({ ...inputData, [key]: value })

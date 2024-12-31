@@ -3,5 +3,7 @@ export function datgetformatDate(date) {
 }   // 2023-07-30
 
 export function getLastWeek(date, days) {
+
+
     return new Date(date.getFullYear(), date.getMonth(), date.getDate() - days)
 }

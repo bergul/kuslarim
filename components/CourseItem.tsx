@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { datgetformatDate } from '../helper/date'
+
 import { useNavigation } from '@react-navigation/native'
 
 
@@ -17,7 +17,7 @@ export default function CourseItem({ amount, date, description, id }) {
                     <Text>{description}</Text>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text>{datgetformatDate(date)}</Text>
+                    <Text>date</Text>
                     <Text>{amount}₺</Text>
                 </View>
             </View>

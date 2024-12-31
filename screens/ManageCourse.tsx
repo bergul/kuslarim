@@ -3,6 +3,7 @@ import React, { useLayoutEffect, useContext } from 'react'
 import { Ionicons } from '@expo/vector-icons';
 import { CourseContext } from '../store/courseContext'
 import CourseForm from '../components/CourseForm';
+import { storeCourse } from '../helper/http';
 export default function ManageCourse({ route, navigation }) {
     const courseId = route.params?.courseId;
     let isEdit = false;
@@ -27,9 +28,11 @@ export default function ManageCourse({ route, navigation }) {
         navigation.goBack();
     }
     function addUpdateHandler(courseData) {
+
         if (isEdit === true) {
             coursesContext.updateCourse({ id: courseId, description: courseData.description, amount: courseData.amount, date: courseData.date });
         } else {
+            storeCourse(courseData);
             coursesContext.addCourse({ description: courseData.description, amount: courseData.amount, date: courseData.date });
         }
         navigation.goBack();
