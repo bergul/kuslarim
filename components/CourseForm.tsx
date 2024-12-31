@@ -10,8 +10,16 @@ export default function CourseForm({ cancelHandler, onSubmit, buttonLabel, defau
     function inputChange(key, value) {
         setInputData({ ...inputData, [key]: value })
     }
+    function validateDate(date: string) {
+        const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+        return datePattern.test(date);
+    }
     function addUpdateHandler() {
         const data = { amount: parseFloat(inputData.amount), date: new Date(inputData.date), description: inputData.description }
+        const isDataValid = data.amount > 0 && data.description.length > 0;
+        if (!isDataValid && !validateDate(data.date.toString('YYYY-MM-DD'))) {
+            return;
+        }
         onSubmit(data);
     }
     return (
