@@ -17,7 +17,7 @@ export default function CourseItem({ amount, date, description, id }) {
                     <Text>{description}</Text>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text>date</Text>
+                    <Text>{date} </Text>
                     <Text>{amount}₺</Text>
                 </View>
             </View>

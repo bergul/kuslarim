@@ -1,21 +1,21 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Courses from '../components/Courses'
 import { CourseContext } from '../store/courseContext'
 import { getLastWeek } from '../helper/date'
 import { fetchCourses } from '../helper/http'
 
 export default function RecentCourse() {
-    // const coursesContext = useContext(CourseContext)
-    const [fetchedCourses, setFetchedCourses] = useState([]);
+    const coursesContext = useContext(CourseContext)
+    // const [fetchedCourses, setFetchedCourses] = useState([]);
 
     useEffect(() => {
         fetchCourses().then((data) => {
-            setFetchedCourses(data);
+            coursesContext.setCourses(data);
 
         });
-    });
-    const recentCourses = fetchedCourses.filter((course: { date: string }) => {
+    }, []);
+    const recentCourses = coursesContext.courses.filter((course: { date: string }) => {
         const today = new Date();
         const lastWeek = getLastWeek(today, 7); // Son 1 hafta için 7 gün
         const courseDate = new Date(course.date);

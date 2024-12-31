@@ -3,7 +3,7 @@ import React, { useLayoutEffect, useContext } from 'react'
 import { Ionicons } from '@expo/vector-icons';
 import { CourseContext } from '../store/courseContext'
 import CourseForm from '../components/CourseForm';
-import { storeCourse } from '../helper/http';
+import { deleteCoursehttp, storeCourse, updateCourse } from '../helper/http';
 export default function ManageCourse({ route, navigation }) {
     const courseId = route.params?.courseId;
     let isEdit = false;
@@ -23,20 +23,30 @@ export default function ManageCourse({ route, navigation }) {
 
         navigation.goBack();
     }
-    function deleteCourse() {
+    async function deleteCourse() {
         coursesContext.deleteCourse(courseId);
+        await deleteCoursehttp(courseId);
         navigation.goBack();
     }
-    function addUpdateHandler(courseData) {
+    async function addUpdateHandler(courseData) {
+        const formattedCourseData = {
+            ...courseData,
+            date: courseData.date.toISOString(), // Date nesnesini dizeye dönüştür
+        };
 
-        if (isEdit === true) {
-            coursesContext.updateCourse({ id: courseId, description: courseData.description, amount: courseData.amount, date: courseData.date });
+        if (isEdit) {
+            coursesContext.updateCourse({ id: courseId, ...formattedCourseData });
+            await updateCourse(formattedCourseData, courseId);
         } else {
-            storeCourse(courseData);
-            coursesContext.addCourse({ description: courseData.description, amount: courseData.amount, date: courseData.date });
+            const id = await storeCourse(formattedCourseData);
+            coursesContext.addCourse({
+                ...formattedCourseData,
+                id: id
+            });
         }
         navigation.goBack();
     }
+
     return (
         <View>
             <CourseForm cancelHandler={cancelHandler} onSubmit={addUpdateHandler} buttonLabel={isEdit ? 'Dersi Güncelle' : 'Ders Ekle'} defaultValues={selectedCourse} />

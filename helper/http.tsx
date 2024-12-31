@@ -1,8 +1,9 @@
 import axios from 'axios'
 
 const baseURL = 'https://crypto-3e5e1-default-rtdb.firebaseio.com';
-export function storeCourse(courseData) {
-    return axios.post(baseURL + '/courses.json', courseData)
+export async function storeCourse(courseData) {
+    const response = await axios.post(baseURL + '/courses.json', courseData)
+    return response.data.name;
 }
 export async function fetchCourses() {
     const response = await axios.get(baseURL + '/courses.json')
@@ -18,5 +19,12 @@ export async function fetchCourses() {
     }
 
     return courses;
+}
+export async function updateCourse(courseData) {
+    return await axios.put(baseURL + '/courses/' + courseData.id + '.json', courseData)
+}
+
+export async function deleteCoursehttp(id) {
+    return await axios.delete(baseURL + '/courses/' + id + '.json')
 }
 
