@@ -2,14 +2,9 @@ import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { datgetformatDate } from '../helper/date'
 import { useNavigation } from '@react-navigation/native'
-type CourseItemProps = {
-    amount: number;
-    date: string;
-    description: string;
-    id: string;
-};
 
-export default function CourseItem({ amount, date, description, id }: CourseItemProps) {
+
+export default function CourseItem({ amount, date, description, id }) {
     const navigation = useNavigation()
     const coursePress = () => {
         navigation.navigate('ManageCourse', { courseId: id })

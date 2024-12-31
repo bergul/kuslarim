@@ -73,13 +73,13 @@ function courseReducer(state, action) {
         case 'DELETE':
             return state.filter(course => course.id !== action.payload);
         case 'UPDATE':
-            const updatecourseIndex = state.findIndex(course => course.id === action.payload.id);
+            const updateblecourseindex = state.findIndex((course) => course.id === action.payload.data.id);
 
-            const updatablecourse = state[updatecourseIndex];
+            const updatablecourse = state[updateblecourseindex];
             const updatedItem = { ...updatablecourse, ...action.payload.data };
             const updatedCourses = [...state
             ];
-            updatedCourses[updatecourseIndex] = updatedItem;
+            updatedCourses[updateblecourseindex] = updatedItem;
             return updatedCourses;
 
         default:
@@ -103,10 +103,10 @@ function CourseContextProvider({ children }) {
             payload: id,
         });
     }
-    function updateCourse(id, courseData) {
+    function updateCourse(courseData) {
         dispatch({
             type: 'UPDATE',
-            payload: { id: id, data: courseData }
+            payload: { data: courseData }
         });
     }
     const contextValue = {
