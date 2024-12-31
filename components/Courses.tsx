@@ -9,13 +9,15 @@ import CourseSummary from './CourseSummary';
 
 
 
-export default function Courses({ coursePeriod, courses }) {
-
-
+export default function Courses({ coursePeriod, courses, contentnulltext }) {
+    let content = <Text>{contentnulltext}</Text>
+    if (courses.length > 0) {
+        content = <CourseList courses={courses} />
+    }
     return (
         <View style={{ flex: 1, padding: 20, backgroundColor: 'lightgray', }}>
             <CourseSummary courses={courses} periodName={coursePeriod} />
-            <CourseList courses={courses} />
+            {content}
         </View>
     )
 }

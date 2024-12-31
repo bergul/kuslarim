@@ -2,6 +2,7 @@ import { Pressable, StyleSheet, View, Text } from 'react-native'
 import React, { useLayoutEffect, useContext } from 'react'
 import { Ionicons } from '@expo/vector-icons';
 import { CourseContext } from '../store/courseContext'
+import CourseForm from '../components/CourseForm';
 export default function ManageCourse({ route, navigation }) {
     const courseId = route.params?.courseId;
     let isEdit = false;
@@ -16,41 +17,31 @@ export default function ManageCourse({ route, navigation }) {
 
         }, [isEdit, navigation]);
     });
+    function cancelHandler() {
 
+        navigation.goBack();
+    }
     function deleteCourse() {
         coursesContext.deleteCourse(courseId);
         navigation.goBack();
     }
-    function addUpdateHandler() {
+    function addUpdateHandler(courseData) {
         if (isEdit === true) {
-            coursesContext.updateCourse({ id: courseId, description: 'Güncel Ders', amount: 100, date: new Date() });
+            coursesContext.updateCourse({ id: courseId, description: courseData.description, amount: courseData.amount, date: courseData.date });
         } else {
-            coursesContext.addCourse({ description: 'Yeni Ders', amount: 100, date: new Date() });
+            coursesContext.addCourse({ description: courseData.description, amount: courseData.amount, date: courseData.date });
         }
         navigation.goBack();
     }
     return (
         <View>
-            <View>
-                <Pressable onPress={() => navigation.goBack()}>
-                    <View style={{ padding: 10, backgroundColor: 'red', minWidth: 100, alignItems: 'center', borderRadius: 10 }}>
-                        <Text style={{ color: 'white' }}>İptal Et</Text>
-                    </View>
-                </Pressable>
-                <Pressable onPress={addUpdateHandler}>
-                    <View style={{ padding: 10, backgroundColor: 'green', minWidth: 100, alignItems: 'center', borderRadius: 10 }}>
-                        <Text>
-                            {isEdit ? 'Dersi Güncelle' : 'Ders Ekle'}
-                        </Text>
-                    </View>
-                </Pressable>
-            </View>
-
+            <CourseForm cancelHandler={cancelHandler} onSubmit={addUpdateHandler} buttonLabel={isEdit ? 'Dersi Güncelle' : 'Ders Ekle'} />
             {isEdit && (
                 <View>
                     <Ionicons name="trash" size={24} color="black" onPress={deleteCourse} />
                 </View>
             )}
+
         </View>
     );
 }

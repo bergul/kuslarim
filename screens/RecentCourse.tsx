@@ -12,7 +12,7 @@ export default function RecentCourse() {
         return course.date >= lastWeek && course.date <= today;
     })
     return (
-        <Courses courses={recentcourses} coursePeriod='Son 1 Hafta' />
+        <Courses contentnulltext='Yakın Zamanda Kurs Kaydınız Yapılmadı' courses={recentcourses} coursePeriod='Son 1 Hafta' />
     )
 }
 
