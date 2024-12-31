@@ -6,6 +6,7 @@ import CourseForm from '../components/CourseForm';
 export default function ManageCourse({ route, navigation }) {
     const courseId = route.params?.courseId;
     let isEdit = false;
+    const selectedCourse = courseId ? useContext(CourseContext).courses.find(course => course.id === courseId) : null;  // If courseId is not null, find the course with the same id
     if (courseId !== undefined) {
         isEdit = true;
     }
@@ -35,7 +36,7 @@ export default function ManageCourse({ route, navigation }) {
     }
     return (
         <View>
-            <CourseForm cancelHandler={cancelHandler} onSubmit={addUpdateHandler} buttonLabel={isEdit ? 'Dersi Güncelle' : 'Ders Ekle'} />
+            <CourseForm cancelHandler={cancelHandler} onSubmit={addUpdateHandler} buttonLabel={isEdit ? 'Dersi Güncelle' : 'Ders Ekle'} defaultValues={selectedCourse} />
             {isEdit && (
                 <View>
                     <Ionicons name="trash" size={24} color="black" onPress={deleteCourse} />
