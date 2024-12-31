@@ -10,7 +10,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AllCourse from './screens/AllCourse';
 import ManageCourse from './screens/ManageCourse';
 import RecentCourse from './screens/RecentCourse';
-import CourseContextProvider from './store/CourseContext';
+import CourseContextProvider from './store/courseContext';
 
 const Stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();

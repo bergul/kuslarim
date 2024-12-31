@@ -1,10 +1,18 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import Courses from '../components/Courses'
+import { CourseContext } from '../store/courseContext'
+import { getLastWeek } from '../helper/date'
 
 export default function RecentCourse() {
+    const coursesContext = useContext(CourseContext)
+    const recentcourses = coursesContext.courses.filter((course: { date: Date }) => {
+        const today = new Date();
+        const lastWeek = getLastWeek(today, 30);
+        return course.date >= lastWeek && course.date <= today;
+    })
     return (
-        <Courses coursePeriod='Son 1 Hafta' />
+        <Courses courses={recentcourses} coursePeriod='Son 1 Hafta' />
     )
 }
 
