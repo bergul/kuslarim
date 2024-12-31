@@ -10,6 +10,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AllCourse from './screens/AllCourse';
 import ManageCourse from './screens/ManageCourse';
 import RecentCourse from './screens/RecentCourse';
+import CourseContextProvider from './store/CourseContext';
 
 const Stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
@@ -26,15 +27,17 @@ function MyTabs() {
 }
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={MyTabs} options={{ headerShown: false }} />
-        <Stack.Screen name="AllCourse" component={AllCourse} />
-        <Stack.Screen name="ManageCourse" component={ManageCourse} />
-        <Stack.Screen name="RecentCourse" component={RecentCourse} />
-      </Stack.Navigator>
-      <StatusBar style="auto" />
-    </NavigationContainer>
+    <CourseContextProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name="Home" component={MyTabs} options={{ headerShown: false }} />
+          <Stack.Screen name="AllCourse" component={AllCourse} />
+          <Stack.Screen name="ManageCourse" component={ManageCourse} />
+          <Stack.Screen name="RecentCourse" component={RecentCourse} />
+        </Stack.Navigator>
+        <StatusBar style="auto" />
+      </NavigationContainer>
+    </CourseContextProvider>
   );
 }
 
