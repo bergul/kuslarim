@@ -2,6 +2,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
 import { useNavigation } from '@react-navigation/native'
+import { getFormattedDate } from '../helper/date'
 
 
 export default function CourseItem({ amount, date, description, id }) {
@@ -17,7 +18,7 @@ export default function CourseItem({ amount, date, description, id }) {
                     <Text>{description}</Text>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text>{date} </Text>
+                    <Text>{getFormattedDate(date).toString('yyyy-MM-dd')} </Text>
                     <Text>{amount}₺</Text>
                 </View>
             </View>
